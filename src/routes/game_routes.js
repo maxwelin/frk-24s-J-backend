@@ -157,7 +157,7 @@ router.get('/player/play/:game/:player/:col/:row', gameController.play);
  *           application/json:
  *             schema: { $ref: '#/components/schemas/User' }
  */
-router.get('/player/create', userController.createPlayer);
+router.put('/player/create', userController.createPlayer);
 
 module.exports = router;
 

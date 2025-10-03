@@ -3,7 +3,7 @@ const playerHandler = require('../domain/player');
 const ERR_MSGS = require('../util/error_messages');
 
 exports.createPlayer = (req, res) => {
-    const user = playerHandler.create();
+    const user = playerHandler.create(req.body.name);
     res.status(201).json(user); // Created
 };
 
