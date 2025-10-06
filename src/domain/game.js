@@ -68,8 +68,9 @@ const play = (id, playerId, col, row) => {
     if(!playerId) throw ERR_MSGS.ERR_PLAYER_NOT_FOUND;
 
     game.round++;
-    game.player = (game.round % 2) + 1;
+    game.player = (game.round % 2);
     game.board.tiles[row][col] = game.player;
+
     const won = gomokuHandler.isWin(game.board)
  
     return {game, won};
@@ -80,7 +81,6 @@ const findGamesByName = (name) => {
 }
 
 const findGameById = (id) => {
-    console.log(games);
     if(!id) throw ERR_MSGS.ERR_GAME_NOT_FOUND;
     const game = games.find( game => game.id === id );
     if(!game) {
