@@ -69,8 +69,10 @@ const play = (id, playerId, col, row) => {
 
     game.round++;
     game.player = (game.round % 2) + 1;
-    game.board.tiles[col][row] = game.player;
-    return game;
+    game.board.tiles[row][col] = game.player;
+    const won = gomokuHandler.isWin(game.board)
+ 
+    return {game, won};
 }
 
 const findGamesByName = (name) => {

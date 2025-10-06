@@ -21,34 +21,25 @@ const isTie = (board) => {
 }
 
 const isWin = (board) => {
-    for (let col = 1; col <= (board.cols); col++){
-        for (let row = 1; row <= (board.rows); row++){
-            const tile = {col: col, row: row};
-            if(testRow(diagonal(tile), board)) return true;
-            if(testRow(horizontal(tile), board)) return true;
-            if(testRow(vertical(tile), board)) return true;
-        }
+   for (let row = 0; row < board.rows; row++) {
+    for (let col = 0; col < board.cols; col++) {
+        const tile = { row, col };
+        if (testRow(diagonal(tile), board)) return true;
+        if (testRow(horizontal(tile), board)) return true;
+        if (testRow(vertical(tile), board)) return true;
     }
+}
     return false;
 }
 
 const createBoard = () => {
-    const board = {
-        minInRow: MINIMUM_WIN_LENGTH,
-        cols: COLS,
-        rows: ROWS,
-        tiles: []
-    }
-    for (let i = 0; i < COLS + 1; i++) {
-        board.tiles.push(Array(ROWS + 1));
-    }
-    for(let col = 0; col <= board.tiles.length - 1; col++){
-        for(let row = 0; row <= board.tiles.length - 1; row++){
-                board.tiles[col][row] = 0;
-        }
-    }
-    return board;
-}
+    return {
+        minInRow: 5,
+        ROWS,
+        COLS,
+        tiles: Array.from({ length: ROWS }, () => Array(COLS).fill(0))
+    };
+};
 
 const play = (board, col, row, player) => {
     if(col <= 0 || row <= 0){
@@ -57,13 +48,13 @@ const play = (board, col, row, player) => {
     if(col > COLS || row > ROWS){
         throw(ERR_MSGS.ERR_TILE_OUT_OF_BOUNDS);
     }
-
     if(board.tiles[col][row] == 0){
         board.tiles[col][row] = player;
     }else{
         throw new Error(ERR_MSGS.ERR_TILE_OCCUPIED);
     }
-    return board;
+
+    return board
 }
 
 const testRow = (row, board) => {
