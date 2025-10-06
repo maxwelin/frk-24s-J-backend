@@ -73,7 +73,7 @@ const testRow = (row, board) => {
 
     const first = row[0];
     const player = board.tiles[first.row][first.col];
-    if (player === 0) return false; // Assuming 0 means empty
+    if (player === 0) return false;
 
     for (let tile of row) {
         if (board.tiles[tile.row][tile.col] !== player) return false;

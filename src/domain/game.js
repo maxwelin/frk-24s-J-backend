@@ -68,8 +68,9 @@ const play = (id, playerId, col, row) => {
     if(!playerId) throw ERR_MSGS.ERR_PLAYER_NOT_FOUND;
 
     game.round++;
-    game.player = (game.round % 2);
-    game.board.tiles[row][col] = game.player;
+    const currentPlayer = (game.round % 2 === 0) ? 2 : 1;
+    game.player = currentPlayer;
+    game.board.tiles[row][col] = currentPlayer
 
     const won = gomokuHandler.isWin(game.board)
  
