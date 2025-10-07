@@ -22,8 +22,8 @@ const isTie = (board) => {
 }
 
 const isWin = (board) => {
-    for (let row = 0; row < board.ROWS; row++) {
-        for (let col = 0; col < board.COLS; col++) {
+    for (let row = 0; row < board.rows; row++) {
+        for (let col = 0; col < board.cols; col++) {
             const tile = { row, col };
 
             if (testRow(horizontal(tile), board)) return true;
@@ -38,9 +38,9 @@ const isWin = (board) => {
 
 const createBoard = () => {
     return {
-        minInRow: 5,
-        ROWS,
-        COLS,
+        minInRow: MINIMUM_WIN_LENGTH,
+        rows: ROWS,
+        cols: COLS,
         tiles: Array.from({ length: ROWS }, () => Array(COLS).fill(0))
     };
 };
@@ -64,8 +64,8 @@ const play = (board, col, row, player) => {
 const testRow = (row, board) => {
     for (let tile of row) {
         if (
-            tile.row < 0 || tile.row >= board.ROWS ||
-            tile.col < 0 || tile.col >= board.COLS
+            tile.row < 0 || tile.row >= board.rows ||
+            tile.col < 0 || tile.col >= board.cols
         ) {
             return false;
         }
